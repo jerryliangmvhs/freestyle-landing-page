@@ -11,6 +11,10 @@
         font-family: chinese-cyberpunk;
         src: url("chinese-cyberpunk.ttf");
     }
+    @font-face {
+        font-family: dale-adventure;
+        src: url("dale-adventure.ttf");
+    }
     .exhibit{
        width: 100% !important;
        height: 100% !important;
@@ -19,6 +23,7 @@
         margin: 0;
         width: 100vw;
         height: 100vh;
+        overflow: hidden;
     }
     #loadingScreen{
         width: 100vw;
@@ -55,15 +60,84 @@
     #outroScreen.show{
         opacity: 1;
     }
+    #caption{
+        position: absolute;
+        color: white;
+        text-align: center;
+        pointer-events: none;
+        width: 100%;
+        font-family: dale-adventure, Arial, Helvetica, sans-serif;
+        top: 90vh;
+        font-size: clamp(20px,2vw,100px);
+        transition: opacity 1.5s ease;
+    }
+    #caption.hidden{
+        opacity: 0;
+    }
+    #buttons{
+        position: absolute;
+        top: 20px;
+        right: 20px;
+    }
+    #buttons button{
+        width: 50px;
+        height: 50px;
+        padding: 0;
+        background: none;
+        border: none;
+        margin: 0;
+        cursor: pointer;
+    }
+    #buttons img{
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+    }
+
 </style>
 <body>
+    <audio id = "backgroundMusic" preload="auto">
+        <source src = "lofi-background.mp3" type = "audio/mp3">
+    </audio>
+    <audio id = "clickSound" preload="auto">
+        <source src = "click.mp3" type = "audio/mp3">
+    </audio>
     <div id = "loadingScreen">
         <h1 id = "loadingText">Loading...</h1>
     </div>
-    <div id = "outroScreen">
-
+    <div id = "buttons">
+        <button class = "musicButton" id = "musicButton" onclick = "toggleMusic()"><img src = "play-button.png"></button>
+        <button class = "2dWebsiteButton" onclick = "redirect2D()"><img src = "2d-website-button.png"></button>
     </div>
+    <div id = "outroScreen"></div>
+    <p id = "caption">Click and drag around to interact!</p>
     <canvas id = "exhibit" class = "exhibit"></canvas>
     <script type="module" src="/main.js"></script>
+
+    <script>
+    let isPlaying = false;
+    const musicButton = document.getElementById("musicButton");
+    const backgroundMusic = document.getElementById("backgroundMusic");
+    const clickSound = document.getElementById("clickSound");
+    function toggleMusic(){
+        clickSound.play();
+        if(isPlaying){
+            isPlaying = false;
+            musicButton.innerHTML = '<img src = "play-button.png">';
+            backgroundMusic.pause();
+        }
+        else if(!isPlaying){
+            isPlaying = true;
+            musicButton.innerHTML = '<img src = "pause-button.png">';
+            backgroundMusic.play();
+        }
+    }
+    function redirect2D(){
+        clickSound.play();
+        setTimeout(()=>{
+            location.assign('https://freestyleacademy.rocks/~JerryL/home');
+        },500);
+    }
+</script>
 </body>
 </html>

@@ -57,6 +57,7 @@ loader.setDRACOLoader(dracoLoader);
 const loadingText = document.getElementById("loadingText");
 const loadingScreen = document.getElementById("loadingScreen");
 const outroScreen = document.getElementById("outroScreen");
+const caption = document.getElementById("caption");
 
 loader.load('models/The Jerry Station.glb', function(gltf){
   model = gltf.scene;
@@ -99,6 +100,7 @@ const mouse = new THREE.Vector2();
 window.addEventListener("mousedown",(event)=>{
     console.log("camera.position.set("+camera.position.x+", "+camera.position.y+", "+camera.position.z+");");
     console.log("controls.target.set("+controls.target.x+", "+controls.target.y+", "+controls.target.z+");");
+    caption.classList.add("hidden");
 
     mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
     mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
