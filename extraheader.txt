@@ -1,0 +1,12 @@
+<meta property="og:site_name" content="Title" />
+<meta property="og:title" content="Title" />
+<meta property="twitter:title" content="Title" />
+<meta property="og:url" content="https://freestyleacademy.rocks/~JerryL/"/>
+<meta property="og:type" content="website">
+<meta property="og:description" content="Welcome to Jerry Liang's Freestyle Website!" />
+
+<meta property="og:image" content="link_to_image"/>
+<meta property="og:image:secure_url" content="link_to_image"/>
+<meta property="twitter:image" content="link_to_image"/>
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:description" content="Welcome to Jerry Liang's Freestyle Website!">
