@@ -18,7 +18,7 @@ scene.background = new THREE.Color('rgb(6,8,18)');
 const renderer = new THREE.WebGLRenderer({canvas: canvas, antialias: true});
 
 const controls = new OrbitControls( camera, renderer.domElement );
-controls.enablePan = true;
+controls.enablePan = false;
 controls.enableZoom = true;
 controls.maxPolarAngle = Math.PI/2;
 controls.minPolarAngle = 0;
@@ -97,10 +97,26 @@ const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2();
 
 
-window.addEventListener("mousedown",(event)=>{
+let pressStart;
+const MAX_CLICK_TIME = 200;
+
+window.addEventListener("pointerdown", () => {
+    pressStart = Date.now();
+    caption.classList.add("hidden");
+});
+
+window.addEventListener("pointerup", () => {
+    const duration = Date.now() - pressStart;
+
+    if (duration < MAX_CLICK_TIME) {
+        console.log("Quick tap/click!");
+        checkClick();
+    }
+});
+
+function checkClick(){
     console.log("camera.position.set("+camera.position.x+", "+camera.position.y+", "+camera.position.z+");");
     console.log("controls.target.set("+controls.target.x+", "+controls.target.y+", "+controls.target.z+");");
-    caption.classList.add("hidden");
 
     mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
     mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
@@ -124,7 +140,7 @@ window.addEventListener("mousedown",(event)=>{
             obj = obj.parent;
         }
       }
-});
+}
 
 
 document.addEventListener('keydown', (event) => {
